@@ -1,3 +1,6 @@
+Esta aplicacion se encuentra desplegada con un hosting de firebase, dando click al siguiente enlace puedes correrla directamente.
+https://chaty-4b4aa.web.app/
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
