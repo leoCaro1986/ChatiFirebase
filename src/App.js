@@ -1,4 +1,3 @@
-import './App.css';
 import React, { Component } from 'react';
 import {
   Route,
@@ -11,81 +10,99 @@ import Chat from './pages/Chat';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import { auth } from './services/firebase';
+import './style/style.css';
 
 
 
-function PrivateRoute({ component: Component, authenticated, ...rest }) {
+function PrivateRoute({ component: Component, authenticated, ...rest}) {
   return (
     <Route
       {...rest}
-      render={(props) => authenticated === true
-        ? <Component {...props} />
-        : <Redirect to={{ pathname: '/login', state: { from: props.location } }} />}
+      render={(props) => 
+        authenticated === true ? (   
+          <Component {...props} />
+        ) : (
+          <Redirect 
+            to={{ pathname: "/login", state: { from: props.location }}} 
+          />
+        )
+      }
     />
-  )
+  );
 }
 
 
-function PublicRoute({ component: Component, authenticated, ...rest }) {
+function PublicRoute({ component: Component, authenticated, ...rest}) {
   return (
     <Route
-      {...rest}
-      render={(props) => authenticated === false
-        ? <Component {...props} />
-        : <Redirect to='/chat' />}
+    {...rest}
+    render={(props) => 
+      authenticated === false ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to='/chat' />
+        )
+    }
     />
-  )
-}
-
-
-render(); {
-  return this.state.loading === true ? <h2>Loading...</h2> : (
-    <Router>
-      <Switch>
-        <Route exact path="/" component={Home}></Route>
-        <PrivateRoute path="/chat" authenticated={this.state.authenticated} component={Chat}></PrivateRoute>
-        <PublicRoute path="/signup" authenticated={this.state.authenticated} component={Signup}></PublicRoute>
-        <PublicRoute path="/login" authenticated={this.state.authenticated} component={Login}></PublicRoute>
-      </Switch>
-    </Router>
   );
 }
 
 
 class App extends Component {
+
   constructor() {
     super();
     this.state = {
       authenticated: false,
-      loading: true,
+      loading: true
     };
   }
-}
-export default App;
 
-componentDidMount(); {
-  auth().onAuthStateChanged((user) => {
-    if (user) {
-      this.setState({
-        authenticated: true,
-        loading: false,
-      });
-    } else {
-      this.setState({
-        authenticated: false,
-        loading: false,
-      });
-    }
-  })
-}
+  componentDidMount() {
+    auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.setState({
+          authenticated: true,
+          loading: false
+        });
+      } else {
+        this.setState({
+          authenticated: false,
+          loading: false
+        });
+      }
+    });
+  }
 
+  render() {
+    return this.state.loading === true ? (
+      <div className="spinner-border text-success" role="status">
+        <span className="sr-only">Loading...</span>
+      </div>
+    ) : (
+        <Router>
+          <Switch>
+            <Route exact path="/" component={Home} />
+            <PrivateRoute
+              path="/chat"
+              authenticated={this.state.authenticated}
+              component={Chat}
+            />
+            <PublicRoute
+              path="/signup"
+              authenticated={this.state.authenticated}
+              component={Signup}
+            />
+            <PublicRoute
+              path="/login"
+              authenticated={this.state.authenticated}
+              component={Login}
+            />
+          </Switch>
+        </Router>
+      );
+  }
 
-function App() {
-  return (
-    <div className="App">
-      <auth/>
-    </div>
-  );
 }
 
 export default App;
