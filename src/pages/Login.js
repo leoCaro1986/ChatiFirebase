@@ -56,8 +56,8 @@ export default class Login extends Component {
 				className="mt-5 py-5 px-5"
 				autoComplete="off"
 				onSubmit={this.handleSubmit}>
-					<h1>Login to <Link className="title ml-2" to = "/">Chatty</Link> </h1>
-					<p className="lead">Fill in the form below to login to your account.</p>
+					<h1>Tu <Link className="title ml-2" to = "/">Chat</Link> </h1>
+					<p className="lead">Por favor ingrese su email y contraseña para continuar</p>
 					<div className="form-group">
 						<input
 						className="form-control"
@@ -78,18 +78,18 @@ export default class Login extends Component {
 					</div>
                     <div className="form-group">
                         {this.state.error ? <p>{this.state.error}</p> : null}
-                        <button className="btn btn-dark px-5" type="submit">Login</button>
+                        <button className="btn btn-dark px-5" type="submit">Ingresar</button>
                     </div>
-					<p>You can also log in with any of these services</p>
+					<p>También puede iniciar sesión con cualquiera de estos servicios</p>
           			<button className="btn mr-3 text-white" onClick={this.googleSignIn}>
-            			Sign in with Google
+            			Ingresar con Google
           			</button>
 					<button className="btn mr-3 text-white" type="button" onClick={this.githubSignIn}>
-           	 			Sign in with GitHub
+					Ingresar con GitHub
           			</button>
 					<hr />
           			<p>
-						Don't have an account? <Link to="/signup">Sign up</Link>
+						Aun no tienes tu cuenta? <Link to="/signup">Create una aquí</Link>
 					</p>
 				</form>
 				<Footer></Footer>
